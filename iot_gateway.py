@@ -22,7 +22,7 @@ myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
 myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
 myAWSIoTClient.connect()
-while(True)
+while(True):
     message = {"temperature": 35}
     messageJson = json.dumps(message)
     myAWSIoTClient.publish(topic, messageJson, 1)
