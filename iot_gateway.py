@@ -5,7 +5,7 @@ from time import sleep
 
 #authentication information and topic name 
 rootCAPath = "root-CA.crt"
-certificatePath = "c5ffe0127c-certificate.pem"
+certificatePath = "c5ffe0127c-certificate.pem.crt"
 privateKeyPath = "c5ffe0127c-private.pem.key"
 topic = "poll/tracking"
 
