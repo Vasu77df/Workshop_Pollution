@@ -9,7 +9,7 @@ certificatePath = "c5ffe0127c-certificate.pem.crt"
 privateKeyPath = "c5ffe0127c-private.pem.key"
 topic = "poll/tracking"
 
-myAWSIoTClient = AWSIoTMQTTClient("myClientID")
+myAWSIoTMQTTClient = AWSIoTMQTTClient("myClientID")
 myAWSIoTMQTTClient = AWSIoTMQTTClient("myClientID")
 myAWSIoTMQTTClient.configureEndpoint("a1jgcb96hr49vu-ats.iot.us-east-2.amazonaws.com", 8883)
 myAWSIoTMQTTClient.configureCredentials(rootCAPath, privateKeyPath, certificatePath)
@@ -21,11 +21,11 @@ myAWSIoTMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
 myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
 myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
-myAWSIoTClient.connect()
+myAWSIoTMQTTClient.connect()
 while(True):
     message = {"temperature": 35}
     messageJson = json.dumps(message)
-    myAWSIoTClient.publish(topic, messageJson, 1)
+    myAWSIoTMQTTClient.publish(topic, messageJson, 1)
     print('Published Topic %s: %s \n' % (topic, messageJson))
     sleep(5)
 
