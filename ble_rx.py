@@ -15,7 +15,7 @@ humidity_uuid = btle.UUID("2c19")
 pressure_uuid = btle.UUID("2d19")
 temp_value = pollution_service.getCharacteristics(temperature_uuid)[0]
 humidity_value = pollution_service.getCharacteristics(humidity_uuid)[0]
-pressure_value = pollution_service.getCharacteristics(humidity_uuid)[0]
+pressure_value = pollution_service.getCharacteristics(pressure_uuid)[0]
 
 def converter(data):
     data = str(data)
