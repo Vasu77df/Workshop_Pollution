@@ -21,9 +21,10 @@ def converter(data):
     data = str(data)
     data = data.strip('b')
     data = data.strip("'")
+    data = data.strip("x")
     data = data.strip('\\r\\n')
     data = int(data, 16)
-    
+
     return data
 
 # Read sensor
