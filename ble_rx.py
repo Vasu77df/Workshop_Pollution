@@ -24,7 +24,7 @@ def converter(data):
     data = data.strip('\\r\\n')
     data = float(data)
 
-    retunr data
+    return data
 
 # Read sensor
 if __name__ == "__main__":
