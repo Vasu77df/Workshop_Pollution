@@ -21,8 +21,8 @@ def converter(data):
     data = str(data)
     data = data.strip('b')
     data = data.strip("'")
-    data = data.strip("x")
     data = data.strip('\\r\\n')
+    data = data.strip("x")
 
     return data
 
