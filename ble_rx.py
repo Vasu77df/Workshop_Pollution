@@ -30,7 +30,6 @@ if __name__ == "__main__":
     while True:
         temp = temp_value.read()
         humidity = humidity_value.read()
-        pressure = pressure_value.read()
         temp_int = converter(temp)
         humidity_int = converter(humidity)
         sensor_data = {"Temperature": temp_int, "Humidity": humidity_int}
