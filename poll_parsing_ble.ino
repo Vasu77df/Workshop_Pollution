@@ -21,10 +21,7 @@ void setup() {
     Serial.println("Failed to initialize humidity temprature sensor!");
     while (1);
     }
-    if (!BARO.begin()){
-    Serial.println("Failed to initialize pressure sensor!");
-    while (1);
-    }
+   
     /* Set a local name for the BLE device
      This name will appear in advertising packets
      and can be used by remote devices to identify this BLE device
