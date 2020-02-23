@@ -22,6 +22,7 @@ def converter(data):
     data = data.strip('b')
     data = data.strip("'")
     data = data.strip('\\r\\n')
+    data = hex(data)
     data = float(data)
 
     return data
