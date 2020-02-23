@@ -24,6 +24,7 @@ while True:
     temp = temp_value.read()
     humidity = humidity_value.read()
     pressure = pressure_value.read()
+    print(type(temp))
+    print(type(humidity))
     sensor_data = {"Temperature": temp, "Humidity": humidity, "Pressure": pressure}
-    sensor_json = json.dumps(sensor_data)
-    print(sensor_json)
+    print(sensor_data)
