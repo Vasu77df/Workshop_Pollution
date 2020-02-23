@@ -12,10 +12,8 @@ for ch in pollution_service.getCharacteristics():
 
 temperature_uuid = btle.UUID("2b19")
 humidity_uuid = btle.UUID("2c19")
-pressure_uuid = btle.UUID("2d19")
 temp_value = pollution_service.getCharacteristics(temperature_uuid)[0]
 humidity_value = pollution_service.getCharacteristics(humidity_uuid)[0]
-pressure_value = pollution_service.getCharacteristics(pressure_uuid)[0]
 
 def converter(data):
     data = str(data)
@@ -35,7 +33,6 @@ if __name__ == "__main__":
         pressure = pressure_value.read()
         temp_int = converter(temp)
         humidity_int = converter(humidity)
-        pressure_int = converter(pressure)
-        sensor_data = {"Temperature": temp_int, "Humidity": humidity_int, "Pressure": pressure_int}
+        sensor_data = {"Temperature": temp_int, "Humidity": humidity_int}
         sensor_json = json.dumps(sensor_data)
         print(sensor_json)

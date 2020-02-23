@@ -1,13 +1,12 @@
 #include <ArduinoBLE.h>
 #include <Arduino_HTS221.h>
-#include <Arduino_LPS22HB.h>
+
 // BLE battery characteristics
 BLEService pollutionService("190f");
 
 //BLE Pollution Characteristics 
 BLEUnsignedCharCharacteristic temperatureLevelChar("2b19", BLERead | BLENotify);
-BLEUnsignedCharCharacteristic humidityLevelChar("2c19", BLERead | BLENotify);
-BLEUnsignedCharCharacteristic pressureLevelChar("2b19", BLERead | BLENotify);// standard 16-bit characteristic UUID
+BLEUnsignedCharCharacteristic humidityLevelChar("2c19", BLERead | BLENotify);// standard 16-bit characteristic UUID
 // remote clients will be able to get notifications if this characteristic changes
 
 void setup() {
@@ -61,15 +60,16 @@ void loop() {
         digitalWrite(LED_BUILTIN, HIGH);
         //while central is connected: 
         while (central.connected()) {
-            while (true){
-                float pressure = BARO.readPressure();
                 float temperature = HTS.readTemperature();
                 float humidity = HTS.readHumidity();
+              
                 temperatureLevelChar.writeValue(temperature);
+                Serial.println("Temperature:");
+                Serial.println(temperature);
                 humidityLevelChar.writeValue(humidity);
-                pressureLevelChar.writeValue(pressure);   
-                delay(1000);     
-            }
+                Serial.println("Humidity:");
+                Serial.println(humidity); 
+                delay(2000);     
         }
         digitalWrite(LED_BUILTIN, LOW);
         Serial.print("Disconnected from central: ");
