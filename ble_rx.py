@@ -33,14 +33,9 @@ if __name__ == "__main__":
         temp = temp_value.read()
         humidity = humidity_value.read()
         pressure = pressure_value.read()
-        print(type(temp))
-        print(type(humidity))
         temp_int = converter(temp)
         humidity_int = converter(humidity)
         pressure_int = converter(pressure)
-        sensor_data = {"Temperature": temp, "Humidity": humidity, "Pressure": pressure}
-        print(sensor_data)
-        print(temp_int)
-        print(type(temp_int))
-        print(humidity_int)
-        print(pressure_int)
+        sensor_data = {"Temperature": temp_int, "Humidity": humidity_int, "Pressure": pressure_int}
+        sensor_json = json.dumps(sensor_data)
+        print(sensor_json)
