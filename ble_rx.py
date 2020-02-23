@@ -23,6 +23,7 @@ def converter(data):
     data = data.strip("'")
     data = data.strip('\\r\\n')
     data = data.strip("x")
+    data = int(data, 16)
 
     return data
 
