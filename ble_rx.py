@@ -2,10 +2,13 @@ from bluepy import btle
 import json
 print("Connecting....")
 dev = btle.Peripheral("E2:B4:50:FA:1D:D9")
+for svc in dev.services: 
+    print(str(svc))
 
 pollution_sensor = btle.UUID("190f")
 pollution_service = dev.getServiceByUUID(pollution_sensor)
-
+for ch in pollution_service.getCharacteristics():
+    print(str(ch))
 temperature_uuid = btle.UUID("2b19")
 humidity_uuid = btle.UUID("2c19")
 temp_value = pollution_service.getCharacteristics(temperature_uuid)[0]
