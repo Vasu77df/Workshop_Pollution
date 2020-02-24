@@ -11,7 +11,6 @@ privateKeyPath = "c5ffe0127c-private.pem.key"
 topic = "poll/tracking"
 
 myAWSIoTMQTTClient = AWSIoTMQTTClient("myClientID")
-myAWSIoTMQTTClient = AWSIoTMQTTClient("myClientID")
 myAWSIoTMQTTClient.configureEndpoint("a1jgcb96hr49vu-ats.iot.us-east-2.amazonaws.com", 8883)
 myAWSIoTMQTTClient.configureCredentials(rootCAPath, privateKeyPath, certificatePath)
 
@@ -40,11 +39,12 @@ humidity_value = pollution_service.getCharacteristics(humidity_uuid)[0]
 
 def converter(data):
     data = str(data)
+    print(data)
     data = data.strip('b')
     data = data.strip("'")
     data = data.strip('\\r\\n')
     data = data.strip("x")
-    data = int(data, 16)
+    print(data)
 
     return data
 
