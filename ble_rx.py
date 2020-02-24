@@ -50,7 +50,6 @@ def converter(data):
 
 # Read sensor
 if __name__ == "__main__":
-    i = 0
     while True:
         temp = temp_value.read()
         humidity = humidity_value.read()
@@ -61,5 +60,4 @@ if __name__ == "__main__":
         sensor_json = json.dumps(sensor_data)
         myAWSIoTMQTTClient.publish(topic, sensor_json, 1)
         print('Published Topic %s: %s \n' % (topic, sensor_json))
-        i += 1 
         sleep(1)
