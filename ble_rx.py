@@ -1,6 +1,7 @@
 from bluepy import btle
 import json
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+import time 
 from time import sleep
 
 #authentication information and topic name 
@@ -55,7 +56,8 @@ if __name__ == "__main__":
         humidity = humidity_value.read()
         temp_int = converter(temp)
         humidity_int = converter(humidity)
-        sensor_data = {"Sensor_Data": i, "Sensor_time": i, "Temperature": temp_int, "Humidity": humidity_int}
+        milli = int(round(time.time()*1000))
+        sensor_data = {"Sensor_time": milli, "Temperature": temp_int, "Humidity": humidity_int}
         sensor_json = json.dumps(sensor_data)
         myAWSIoTMQTTClient.publish(topic, sensor_json, 1)
         print('Published Topic %s: %s \n' % (topic, sensor_json))
