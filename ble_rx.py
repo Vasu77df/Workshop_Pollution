@@ -59,7 +59,7 @@ if __name__ == "__main__":
         humidity_int = converter(humidity)
         pressure_int = converter(pressure)
         milli = int(round(time.time()*1000))
-        sensor_data = {"Sensor_time": milli, "Temperature": temp_int, "Humidity": humidity_int}
+        sensor_data = {"Sensor_time": milli, "Temperature": temp_int, "Humidity": humidity_int, "Pressure": pressure_int}
         sensor_json = json.dumps(sensor_data)
         myAWSIoTMQTTClient.publish(topic, sensor_json, 1)
         print('Published Topic %s: %s \n' % (topic, sensor_json))
