@@ -75,8 +75,8 @@ void loop() {
                 Serial.println("Humidity:");
                 Serial.println(humidity); 
                 pressureLevelChar.writeValue(pressure);
-                Serial.println("Pressure:")
-                Serial.println(pressure)
+                Serial.println("Pressure:");
+                Serial.println(pressure);
                 delay(1000);     
         }
         digitalWrite(LED_BUILTIN, LOW);
