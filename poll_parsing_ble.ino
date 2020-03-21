@@ -1,13 +1,15 @@
 #include <ArduinoBLE.h>
 #include <Arduino_HTS221.h>
-
-// BLE battery characteristics
+#include <Arduino_LPS22HB.h>
+// BLE service
 BLEService pollutionService("190f");
 
 //BLE Pollution Characteristics 
 BLEUnsignedCharCharacteristic temperatureLevelChar("2b19", BLERead | BLENotify);
-BLEUnsignedCharCharacteristic humidityLevelChar("2c19", BLERead | BLENotify);// standard 16-bit characteristic UUID
-// remote clients will be able to get notifications if this characteristic changes
+BLEUnsignedCharCharacteristic humidityLevelChar("2c19", BLERead | BLENotify);
+BLEUnsignedCharCharacteristic pressureLevelChar("2d19", BLERead | BLENotify);
+// standard 16-bit characteristic UUID
+// remote clients will be able to get notifications if these characteristic changes
 
 void setup() {
     Serial.begin(9600);
@@ -21,6 +23,12 @@ void setup() {
     Serial.println("Failed to initialize humidity temprature sensor!");
     while (1);
     }
+
+    if (!BARO.begin()) {
+    Serial.println("Failed to initialize pressure sensor!");
+    while (1);
+    }
+
     /* Set a local name for the BLE device
      This name will appear in advertising packets
      and can be used by remote devices to identify this BLE device
@@ -31,6 +39,7 @@ void setup() {
     BLE.setAdvertisedService(pollutionService);
     pollutionService.addCharacteristic(temperatureLevelChar);
     pollutionService.addCharacteristic(humidityLevelChar);
+    pollutionService.addCharacteristic(pressureLevelChar);
     BLE.addService(pollutionService);
  
     /* Start advertising BLE.  It will start continuously transmitting BLE
@@ -57,13 +66,17 @@ void loop() {
         while (central.connected()) {
                 float temperature = HTS.readTemperature();
                 float humidity = HTS.readHumidity();
-              
+                float pressure = BARO.readPressure();
+
                 temperatureLevelChar.writeValue(temperature);
                 Serial.println("Temperature:");
                 Serial.println(temperature);
                 humidityLevelChar.writeValue(humidity);
                 Serial.println("Humidity:");
                 Serial.println(humidity); 
+                pressureLevelChar.writeValue(pressure);
+                Serial.println("Pressure:")
+                Serial.println(pressure)
                 delay(1000);     
         }
         digitalWrite(LED_BUILTIN, LOW);
