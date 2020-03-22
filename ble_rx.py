@@ -34,18 +34,18 @@ for ch in pollution_service.getCharacteristics():
     print(str(ch))
 temperature_uuid = btle.UUID("2b19")
 humidity_uuid = btle.UUID("2c19")
-
 temp_value = pollution_service.getCharacteristics(temperature_uuid)[0]
 humidity_value = pollution_service.getCharacteristics(humidity_uuid)[0]
 
 def converter(data):
     data = str(data)
+    print(data)
     data = data.strip('b')
     data = data.strip("'")
     data = data.strip('\\r\\n')
     data = data.strip("x")
-    data = int(data, 16)
-    
+    print(data)
+
     return data
 
 # Read sensor

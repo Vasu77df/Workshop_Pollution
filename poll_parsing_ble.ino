@@ -1,14 +1,13 @@
 #include <ArduinoBLE.h>
 #include <Arduino_HTS221.h>
-#include <Arduino_LPS22HB.h>
-// BLE service
+
+// BLE battery characteristics
 BLEService pollutionService("190f");
 
 //BLE Pollution Characteristics 
 BLEUnsignedCharCharacteristic temperatureLevelChar("2b19", BLERead | BLENotify);
-BLEUnsignedCharCharacteristic humidityLevelChar("2c19", BLERead | BLENotify);
-// standard 16-bit characteristic UUID
-// remote clients will be able to get notifications if these characteristic changes
+BLEUnsignedCharCharacteristic humidityLevelChar("2c19", BLERead | BLENotify);// standard 16-bit characteristic UUID
+// remote clients will be able to get notifications if this characteristic changes
 
 void setup() {
     Serial.begin(9600);
@@ -22,12 +21,6 @@ void setup() {
     Serial.println("Failed to initialize humidity temprature sensor!");
     while (1);
     }
-
-    if (!BARO.begin()) {
-    Serial.println("Failed to initialize pressure sensor!");
-    while (1);
-    }
-
     /* Set a local name for the BLE device
      This name will appear in advertising packets
      and can be used by remote devices to identify this BLE device
@@ -64,14 +57,13 @@ void loop() {
         while (central.connected()) {
                 float temperature = HTS.readTemperature();
                 float humidity = HTS.readHumidity();
-
+              
                 temperatureLevelChar.writeValue(temperature);
                 Serial.println("Temperature:");
                 Serial.println(temperature);
                 humidityLevelChar.writeValue(humidity);
                 Serial.println("Humidity:");
                 Serial.println(humidity); 
-            
                 delay(1000);     
         }
         digitalWrite(LED_BUILTIN, LOW);
