@@ -34,10 +34,9 @@ for ch in pollution_service.getCharacteristics():
     print(str(ch))
 temperature_uuid = btle.UUID("2b19")
 humidity_uuid = btle.UUID("2c19")
-pressure_uuid = btle.UUID("2d19")
+
 temp_value = pollution_service.getCharacteristics(temperature_uuid)[0]
 humidity_value = pollution_service.getCharacteristics(humidity_uuid)[0]
-pressure_value = pollution_service.getCharacteristics(pressure_uuid)[0]
 
 def converter(data):
     data = str(data)
@@ -46,7 +45,7 @@ def converter(data):
     data = data.strip('\\r\\n')
     data = data.strip("x")
     data = int(data, 16)
-
+    
     return data
 
 # Read sensor
@@ -54,12 +53,10 @@ if __name__ == "__main__":
     while True:
         temp = temp_value.read()
         humidity = humidity_value.read()
-        pressure = pressure_value.read()
         temp_int = converter(temp)
         humidity_int = converter(humidity)
-        pressure_int = converter(pressure)
         milli = int(round(time.time()*1000))
-        sensor_data = {"Sensor_time": milli, "Temperature": temp_int, "Humidity": humidity_int, "Pressure": pressure_int}
+        sensor_data = {"Sensor_time": milli, "Temperature": temp_int, "Humidity": humidity_int,}
         sensor_json = json.dumps(sensor_data)
         myAWSIoTMQTTClient.publish(topic, sensor_json, 1)
         print('Published Topic %s: %s \n' % (topic, sensor_json))
