@@ -39,12 +39,12 @@ humidity_value = pollution_service.getCharacteristics(humidity_uuid)[0]
 
 def converter(data):
     data = str(data)
-    print(data)
+    print("Raw data: {}".format(data))
     data = data.strip('b')
     data = data.strip("'")
     data = data.strip('\\r\\n')
     data = data.strip("x")
-    print(data)
+    data = int(data, 16)
 
     return data
 
