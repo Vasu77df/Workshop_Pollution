@@ -11,7 +11,7 @@ from ask_sdk_core.handler_input import HandlerInput
 from ask_sdk_model.ui import SimpleCard
 from ask_sdk_model import Response
 
-from alexa import data
+import data
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
