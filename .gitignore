@@ -1,3 +1,4 @@
 c5ffe0127c-certificate.pem.crt
 c5ffe0127c-private.pem.key
-c5ffe0127c-public.pem.key
+c5ffe0127c-public.pem.keyroot-CA.crt
+root-CA.crt
